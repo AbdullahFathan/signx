@@ -15,8 +15,8 @@ class ThemeClass {
     ),
     appBarTheme: const AppBarTheme(
       iconTheme: IconThemeData(color: Colors.black),
-      color: Colors.white,
-      elevation: 0,
+      color: AppColors.scafflodBgColor,
+      elevation: 1,
     ),
   );
 }
