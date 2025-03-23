@@ -6,6 +6,8 @@ class AppColors {
   static const secondaryColor = Color(0xff00BFFF);
   static const secondaryVariantColor = Color(0xff00FFFF);
 
+  static const scafflodBgColor = Color(0xFFFAFAFA);
+
   static const whiteColor = Colors.white;
   static const blackColor = Color(0xff252525);
   static const redColor = Colors.red;
