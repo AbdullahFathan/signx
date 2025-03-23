@@ -7,7 +7,7 @@ class ThemeClass {
   static ThemeData lightTheme = ThemeData(
     fontFamily: 'Roboto',
     textTheme: TextClass.textTheme,
-    scaffoldBackgroundColor: AppColors.whiteColor,
+    scaffoldBackgroundColor: AppColors.scafflodBgColor,
     inputDecorationTheme: InputDecorationStyle.inputDecoration(),
     colorScheme: ThemeData().colorScheme.copyWith(
       primary: AppColors.primaryColor,
