@@ -31,7 +31,9 @@ class _MainAppPageState extends State<MainAppPage> {
 
       floatingActionButton: FloatingActionButton(
         shape: CircleBorder(),
-        onPressed: () => onTap(1),
+        onPressed: () {
+          Navigator.pushNamed(context, AiScanPage.route);
+        },
         backgroundColor: AppColors.primaryVariantColror,
         child: const Icon(
           Icons.camera_alt_outlined,
