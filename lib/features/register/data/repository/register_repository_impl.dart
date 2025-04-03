@@ -4,9 +4,9 @@ import 'package:signx/features/register/domain/entities/register_user.dart';
 import 'package:signx/features/register/domain/repository/register_repository.dart';
 
 class RegisterRepositoryImpl implements RegisterRepository {
-  final AuthRemoteDataSource authRemoteDataSource;
+  final RegisterServices registerServices;
 
-  RegisterRepositoryImpl(this.authRemoteDataSource);
+  RegisterRepositoryImpl(this.registerServices);
 
   @override
   Future<Either<String, User>> registerUser(
@@ -14,7 +14,7 @@ class RegisterRepositoryImpl implements RegisterRepository {
     String password,
   ) async {
     try {
-      final userCredential = await authRemoteDataSource
+      final userCredential = await registerServices
           .registerWithEmailAndPassword(email, password);
       final user = User(
         uid: userCredential.user!.uid,

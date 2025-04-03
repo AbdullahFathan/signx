@@ -7,7 +7,7 @@ import 'package:signx/features/login/presentation/login_page.dart';
 import 'package:signx/features/register/presentation/register_page.dart';
 
 class RouteGenerator {
-  static String initialRoute = MainAppPage.route;
+  static String initialRoute = LoginPage.route;
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case LoginPage.route:

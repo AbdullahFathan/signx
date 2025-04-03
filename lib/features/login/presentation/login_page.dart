@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:signx/config/theme/resources/app_color.dart';
+import 'package:signx/features/register/presentation/register_page.dart';
 import 'package:signx/widgets/email_text_form.dart';
 import 'package:signx/widgets/password_text_form.dart';
 import 'package:signx/widgets/primary_button.dart';
@@ -106,10 +107,17 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                               child: Align(
                                 alignment: Alignment.centerRight,
-                                child: Text(
-                                  "Lupa Password ?",
-                                  style: Theme.of(context).textTheme.bodySmall
-                                      ?.copyWith(fontWeight: FontWeight.w500),
+                                child: GestureDetector(
+                                  onTap:
+                                      () => Navigator.pushNamed(
+                                        context,
+                                        RegisterPage.route,
+                                      ),
+                                  child: Text(
+                                    "Belum punya Akun? Register Yuuk",
+                                    style: Theme.of(context).textTheme.bodySmall
+                                        ?.copyWith(fontWeight: FontWeight.w500),
+                                  ),
                                 ),
                               ),
                             ),
