@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:signx/config/routes/app_route.dart';
 import 'package:signx/config/theme/app_theme.dart';
+import 'package:signx/features/login/presentation/cubit/login_cubit.dart';
 import 'package:signx/features/register/presentation/cubit/register_cubit.dart';
 import 'package:signx/firebase_options.dart';
 import 'package:signx/injection_container.dart';
@@ -24,7 +25,10 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [BlocProvider(create: (context) => RegisterCubit(sl()))],
+      providers: [
+        BlocProvider(create: (context) => RegisterCubit(sl())),
+        BlocProvider(create: (context) => LoginCubit(sl())),
+      ],
       child: MaterialApp(
         initialRoute: RouteGenerator.initialRoute,
         onGenerateRoute: (settings) => RouteGenerator.generateRoute(settings),

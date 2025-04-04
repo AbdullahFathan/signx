@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:signx/config/theme/resources/app_color.dart';
 import 'package:signx/core/state/base_state.dart';
-import 'package:signx/features/bottom_navbar/presentation/bottom_navbar.dart';
+import 'package:signx/features/login/presentation/login_page.dart';
 import 'package:signx/features/register/domain/entities/register_user.dart';
 import 'package:signx/features/register/presentation/cubit/register_cubit.dart';
 import 'package:signx/widgets/email_text_form.dart';
@@ -41,11 +41,8 @@ class _RegisterPageState extends State<RegisterPage> {
           if (state.status == BaseStatus.error) {
             ToastHelper.showError(context, state.error);
           } else if (state.status == BaseStatus.success) {
-            Navigator.pushNamedAndRemoveUntil(
-              context,
-              MainAppPage.route,
-              (route) => false,
-            );
+            Navigator.pushReplacementNamed(context, LoginPage.route);
+            ToastHelper.showSuccess(context, "Silakan Verifikasi Email");
           }
         },
         builder: (context, state) {
