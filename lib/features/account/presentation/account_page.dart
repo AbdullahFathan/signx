@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:signx/config/theme/resources/app_color.dart';
+import 'package:signx/core/state/base_state.dart';
+import 'package:signx/features/account/domain/entities/account_user.dart';
+import 'package:signx/features/account/presentation/cubit/account_cubit.dart';
 import 'package:signx/widgets/primary_appbar.dart';
 import 'package:signx/widgets/primary_button.dart';
 
@@ -29,9 +33,21 @@ class AccountPage extends StatelessWidget {
                   child: Icon(Icons.person_2, size: 32),
                 ),
                 const SizedBox(width: 15),
-                Text(
-                  "Abdullah Fathan",
-                  style: Theme.of(context).textTheme.bodyMedium,
+                BlocBuilder<AccountCubit, BaseState<AccountUser>>(
+                  builder: (context, state) {
+                    String name = "not found";
+                    if (state.status == BaseStatus.loading) {
+                      name = "Loading";
+                    } else if (state.status == BaseStatus.error) {
+                      name = state.error;
+                    } else if (state.status == BaseStatus.success) {
+                      name = "${state.data?.email}";
+                    }
+                    return Text(
+                      name,
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    );
+                  },
                 ),
               ],
             ),
