@@ -1,4 +1,5 @@
 import 'package:fpdart/fpdart.dart';
+import 'package:signx/core/shared_pref/shared_pref_helper.dart';
 import 'package:signx/features/login/data/data_source/remote/login_services.dart';
 import 'package:signx/features/login/domain/entities/login_user.dart';
 import 'package:signx/features/login/domain/repository/login_repository.dart';
@@ -21,6 +22,7 @@ class LoginRepoImp extends LoginRepository {
         uid: userCredential.user!.uid,
         email: userCredential.user!.email!,
       );
+      await SharedPrefsHelper.saveUser(user.toString());
       return Right(user);
     } catch (e) {
       return Left(e.toString());
