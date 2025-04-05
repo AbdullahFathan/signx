@@ -1,4 +1,9 @@
 import 'package:get_it/get_it.dart';
+import 'package:signx/features/account/data/data_source/local/account_services.dart';
+import 'package:signx/features/account/data/repository/account_repo_impl.dart';
+import 'package:signx/features/account/domain/repository/account_repo.dart';
+import 'package:signx/features/account/domain/use_case/account_usecase.dart';
+import 'package:signx/features/account/presentation/cubit/account_cubit.dart';
 import 'package:signx/features/login/data/data_source/remote/login_services.dart';
 import 'package:signx/features/login/data/repository/login_repo_imp.dart';
 import 'package:signx/features/login/domain/repository/login_repository.dart';
@@ -24,4 +29,10 @@ Future<void> initializeDepenencied() async {
   sl.registerSingleton<LoginRepository>(LoginRepoImp(sl()));
   sl.registerSingleton<LoginUsecase>(LoginUsecase(sl()));
   sl.registerFactory<LoginCubit>(() => LoginCubit(sl()));
+
+  //Account
+  sl.registerSingleton<AccountServices>(AccountServices());
+  sl.registerSingleton<AccountRepo>(AccountRepoImpl(sl()));
+  sl.registerSingleton<AccountUseCase>(AccountUseCase(sl()));
+  sl.registerFactory<AccountCubit>(() => AccountCubit(sl()));
 }
