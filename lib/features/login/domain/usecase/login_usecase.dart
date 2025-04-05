@@ -11,10 +11,10 @@ class LoginUsecase {
     String email,
     String password,
   ) async {
-    return _repository.loginByEmailPass(email, password);
+    return await _repository.loginByEmailPass(email, password);
   }
 
   Future<Either<String, User>> loginWithGoogle() async {
-    throw UnimplementedError();
+    return await _repository.loginWithGoogle();
   }
 }

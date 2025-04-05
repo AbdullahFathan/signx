@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:signx/core/state/base_state.dart';
 import 'package:signx/features/login/domain/entities/login_user.dart';
@@ -16,6 +18,18 @@ class LoginCubit extends Cubit<BaseState<User>> {
       (eror) => emit(state.copyWith(status: BaseStatus.error, error: eror)),
       (user) {
         emit(state.copyWith(status: BaseStatus.success, data: user));
+      },
+    );
+  }
+
+  void loginByGoogle() async {
+    emit(state.copyWith(status: BaseStatus.loading));
+    var res = await _usecase.loginWithGoogle();
+    res.fold(
+      (eror) => emit(state.copyWith(status: BaseStatus.error, error: eror)),
+      (user) {
+        emit(state.copyWith(status: BaseStatus.success, data: user));
+        log("Data user = ${user.email}");
       },
     );
   }

@@ -28,4 +28,21 @@ class LoginRepoImp extends LoginRepository {
       return Left(e.toString());
     }
   }
+
+  @override
+  Future<Either<String, User>> loginWithGoogle() async {
+    try {
+      final userCredential = await _services.signInWithGoogle();
+      final firebaseUser = userCredential?.user;
+      if (firebaseUser != null) {
+        final user = User(uid: firebaseUser.uid, email: firebaseUser.email!);
+        await SharedPrefsHelper.saveUser(user.toString());
+        return Right(user);
+      } else {
+        return Left("User Bernilai Null");
+      }
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
 }

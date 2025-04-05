@@ -185,7 +185,11 @@ class _LoginPageState extends State<LoginPage> {
                                   child: PrimaryButtonWidget(
                                     shapeButton: PrimaryButtonShape.stadium,
                                     buttonType: PrimaryButtonType.outlined,
-                                    onTap: () {},
+                                    onTap: () async {
+                                      context
+                                          .read<LoginCubit>()
+                                          .loginByGoogle();
+                                    },
                                     childButton: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
