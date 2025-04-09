@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:signx/features/account/data/data_source/local/account_services.dart';
+import 'package:signx/features/account/data/data_source/remote/firebase_services.dart';
 import 'package:signx/features/account/data/repository/account_repo_impl.dart';
 import 'package:signx/features/account/domain/repository/account_repo.dart';
 import 'package:signx/features/account/domain/use_case/account_usecase.dart';
@@ -38,7 +39,10 @@ Future<void> initializeDepenencied() async {
 
   //Account
   sl.registerSingleton<AccountServices>(AccountServices());
-  sl.registerSingleton<AccountRepo>(AccountRepoImpl(sl()));
+  sl.registerSingleton<FirebaseServices>(FirebaseServices());
+  sl.registerSingleton<AccountRepo>(
+    AccountRepoImpl(sl<AccountServices>(), sl<FirebaseServices>()),
+  );
   sl.registerSingleton<AccountUseCase>(AccountUseCase(sl()));
   sl.registerFactory<AccountCubit>(() => AccountCubit(sl()));
 

@@ -10,4 +10,8 @@ class AccountUseCase {
   Future<Either<String, AccountUser>> getUserProfile() async {
     return _repo.getUserProfile();
   }
+
+  Future<Either<String, String>> logout() async {
+    return _repo.logout();
+  }
 }

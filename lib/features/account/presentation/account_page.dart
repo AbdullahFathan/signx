@@ -4,8 +4,10 @@ import 'package:signx/config/theme/resources/app_color.dart';
 import 'package:signx/core/state/base_state.dart';
 import 'package:signx/features/account/domain/entities/account_user.dart';
 import 'package:signx/features/account/presentation/cubit/account_cubit.dart';
+import 'package:signx/features/login/presentation/login_page.dart';
 import 'package:signx/widgets/primary_appbar.dart';
 import 'package:signx/widgets/primary_button.dart';
+import 'package:signx/widgets/toast_helper.dart';
 
 class AccountPage extends StatelessWidget {
   static const String route = "/account";
@@ -80,9 +82,27 @@ class AccountPage extends StatelessWidget {
                         .toList(),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 32),
-              child: PrimaryButtonWidget(onTap: () {}, text: "Logout"),
+            BlocListener<AccountCubit, BaseState<AccountUser>>(
+              listener: (context, state) {
+                if (state.status == BaseStatus.error) {
+                  ToastHelper.showError(context, state.error);
+                } else if (state.status == BaseStatus.success) {
+                  Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    LoginPage.route,
+                    (route) => false,
+                  );
+                }
+              },
+              child: Padding(
+                padding: const EdgeInsets.only(top: 32),
+                child: PrimaryButtonWidget(
+                  onTap: () {
+                    context.read<AccountCubit>().logout();
+                  },
+                  text: "Logout",
+                ),
+              ),
             ),
           ],
         ),
