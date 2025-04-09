@@ -18,4 +18,16 @@ class AccountCubit extends Cubit<BaseState<AccountUser>> {
           emit(state.copyWith(status: BaseStatus.success, data: userData)),
     );
   }
+
+  void logout() async {
+    emit(state.copyWith(status: BaseStatus.loading));
+    var res = await _useCase.logout();
+
+    res.fold(
+      (eror) => emit(state.copyWith(status: BaseStatus.error, error: eror)),
+      (data) {
+        emit(state.copyWith(status: BaseStatus.success, data: null));
+      },
+    );
+  }
 }
