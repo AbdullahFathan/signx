@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:signx/features/ai_scan/presentation/cubit/ai_scan_cubit.dart';
 import 'package:signx/features/ai_scan/presentation/cubit/ai_scan_state.dart';
 import 'package:signx/widgets/primary_appbar.dart';
+import 'package:signx/widgets/toast_helper.dart';
 
 import '../../../../main.dart';
 
@@ -43,16 +44,12 @@ class _AiScanPageState extends State<AiScanPage> {
         }
       } else {
         if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Tidak ada kamera tersedia.')),
-          );
+          ToastHelper.showError(context, 'Tidak ada kamera tersedia.');
         }
       }
     } catch (e) {
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Gagal menginisialisasi kamera: $e')),
-        );
+        ToastHelper.showError(context, 'Gagal menginisialisasi kamera: $e');
       }
     }
   }
