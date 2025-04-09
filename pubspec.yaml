@@ -20,7 +20,11 @@ dependencies:
   fpdart: ^1.1.1
   get_it: ^8.0.3
   google_sign_in: ^6.3.0
+  image: ^4.5.4
+  image_picker: ^1.1.2
+  path_provider: ^2.1.5
   shared_preferences: ^2.5.3
+  tflite_flutter: ^0.11.0
   toastification: ^3.0.2
 
 dev_dependencies:
@@ -34,6 +38,7 @@ flutter:
   assets:
     - assets/images/
     - .env
+    - assets/model/model.tflite
 
   fonts:
     - family: Roboto
