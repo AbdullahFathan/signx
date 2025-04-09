@@ -4,6 +4,11 @@ import 'package:signx/features/account/data/repository/account_repo_impl.dart';
 import 'package:signx/features/account/domain/repository/account_repo.dart';
 import 'package:signx/features/account/domain/use_case/account_usecase.dart';
 import 'package:signx/features/account/presentation/cubit/account_cubit.dart';
+import 'package:signx/features/ai_scan/data/data_source/local/image_classified.dart';
+import 'package:signx/features/ai_scan/data/repository/ai_scan_repo_impl.dart';
+import 'package:signx/features/ai_scan/domain/repository/ai_scan_repo.dart';
+import 'package:signx/features/ai_scan/domain/usecase/ai_scan_usecase.dart';
+import 'package:signx/features/ai_scan/presentation/cubit/ai_scan_cubit.dart';
 import 'package:signx/features/login/data/data_source/remote/login_services.dart';
 import 'package:signx/features/login/data/repository/login_repo_imp.dart';
 import 'package:signx/features/login/domain/repository/login_repository.dart';
@@ -14,6 +19,7 @@ import 'package:signx/features/register/data/repository/register_repository_impl
 import 'package:signx/features/register/domain/repository/register_repository.dart';
 import 'package:signx/features/register/domain/usecase/register_usecase.dart';
 import 'package:signx/features/register/presentation/cubit/register_cubit.dart';
+import 'package:tflite_flutter/tflite_flutter.dart';
 
 final sl = GetIt.instance;
 
@@ -35,4 +41,12 @@ Future<void> initializeDepenencied() async {
   sl.registerSingleton<AccountRepo>(AccountRepoImpl(sl()));
   sl.registerSingleton<AccountUseCase>(AccountUseCase(sl()));
   sl.registerFactory<AccountCubit>(() => AccountCubit(sl()));
+
+  //Ai-scan Page
+  final interpreter = await Interpreter.fromAsset('assets/model/model.tflite');
+  sl.registerSingleton<Interpreter>(interpreter);
+  sl.registerSingleton<TFLiteLocalDataSource>(TFLiteLocalDataSource(sl()));
+  sl.registerSingleton<AiScanRepo>(AiScanRepoImpl(sl()));
+  sl.registerSingleton<AiScanUsecase>(AiScanUsecase(sl()));
+  sl.registerFactory<AiScanCubit>(() => AiScanCubit(sl()));
 }

@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:signx/config/routes/app_route.dart';
 import 'package:signx/config/theme/app_theme.dart';
 import 'package:signx/features/account/presentation/cubit/account_cubit.dart';
+import 'package:signx/features/ai_scan/presentation/cubit/ai_scan_cubit.dart';
 import 'package:signx/features/login/presentation/cubit/login_cubit.dart';
 import 'package:signx/features/register/presentation/cubit/register_cubit.dart';
 import 'package:signx/firebase_options.dart';
@@ -30,6 +31,7 @@ class MainApp extends StatelessWidget {
         BlocProvider(create: (context) => RegisterCubit(sl())),
         BlocProvider(create: (context) => LoginCubit(sl())),
         BlocProvider(create: (context) => AccountCubit(sl())..getUserData()),
+        BlocProvider(create: (context) => AiScanCubit(sl())),
       ],
       child: MaterialApp(
         initialRoute: RouteGenerator.initialRoute,
